@@ -1,0 +1,82 @@
+[
+    {
+        "id": "0",
+        "attribute" : "Abone No",
+        "value": "1363900"
+    },
+    {
+        "id": "1",
+        "attribute" : "Dönem",
+        "value": "202210"
+    },
+    {
+        "id": "2",
+        "attribute" : "Fatura Tarihi",
+        "value": "25.10.2022"
+    },
+    {
+        "id": "3",
+        "attribute" : "Fatura No",
+        "value": "918883950"
+    },
+    {
+        "id": "4",
+        "attribute" : "Adresi",
+        "value": "Konya/Selçuklu"
+    },
+    {
+        "id": "5",
+        "attribute" : "Abone Türü",
+        "value": "Mesken Ev/ Apartman"
+    },
+    {
+        "id": "6",
+        "attribute" : "İlk Okuma Tarihi",
+        "value": "27.09.2022"
+    },
+    {
+        "id": "7",
+        "attribute" : "Son Okuma Tarihi",
+        "value": "25.10.2022"
+    },
+    {
+        "id": "8",
+        "attribute" : "Sayaç No",
+        "value": "10961231"
+    },
+    {
+        "id": "9",
+        "attribute" : "Okuyucu No",
+        "value": "64"
+    },
+    {
+        "id": "10",
+        "attribute" : "Okuma Kodu",
+        "value": "1"
+    },
+    {
+        "id": "11",
+        "attribute" : "İlk Endeks",
+        "value": "47"
+    },
+    {
+        "id": "12",
+        "attribute" : "Son Endeks",
+        "value": "52"
+    },
+    {
+        "id": "13",
+        "attribute" : "İlave / İade",
+        "value": "0"
+    },
+    {
+        "id": "14",
+        "attribute" : "Sarfiyat",
+        "value": "5"
+    },
+    {
+        "id": "15",
+        "attribute": "Ödenecek Tutar",
+        "value": "200TL"
+    }
+]

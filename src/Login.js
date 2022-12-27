@@ -49,7 +49,7 @@ const Login = props => {
           <Text style={styles.forgot_password_text}>Forgot Password ?</Text>
         </View>
 
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('Dashboard')}>
           <Text style={styles.button_text}>Devam</Text>
         </TouchableOpacity>
       

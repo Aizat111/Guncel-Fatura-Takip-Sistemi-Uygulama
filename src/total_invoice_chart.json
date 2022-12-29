@@ -1,0 +1,17 @@
+[
+    {
+        "id":"0",
+        "invoice_amount" : 60,
+        "color" : "#b7d935"
+    },
+    {
+        "id":"1",
+        "invoice_amount" : 50,
+        "color" : "#4fc9da"
+    },
+    {
+        "id":"2",
+        "invoice_amount" : 40,
+        "color" : "#e8c445"
+    }
+]

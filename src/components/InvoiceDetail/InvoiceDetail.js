@@ -1,10 +1,20 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {SafeAreaView, View, Text, FlatList} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import styles from './InvoiceDetail.Style';
-import invoice from './../../invoice.json';
-const InvoiceDetail = props => {
-  const [list, setList] = useState(invoice);
+import water_invoice from './../../water_invoice.json';
+import electric_invoice from './../../electric_invoice.json'
+const InvoiceDetail = ({activeLink}) => {
+const [list, setList] = useState(water_invoice);
+useEffect(()=>{
+if(activeLink==1){
+  setList(water_invoice)
+}
+else if(activeLink==2) {
+  setList(electric_invoice)
+}
+},[activeLink])
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header_container}>
@@ -20,26 +30,25 @@ const InvoiceDetail = props => {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.inner_container}>
+      <ScrollView style={styles.inner_container}>
         <FlatList
           keyExtractor={item => item.id}
           data={list}
           renderItem={({item}) => (
             <View>
-              {item.id == '15' ? (
-                <View style={{marginTop:30}}>
-                     <View style={styles.item_container}>
-                  <View style={styles.columns}>
-                    <Text style={styles.total_attribute_text}>
-                      {item.attribute}
-                    </Text>
-                  </View>
-                  <View style={styles.columns}>
-                    <Text style={styles.total_value_text}>{item.value}</Text>
+              {item.id == list.length-1 ? (
+                <View style={{marginTop: 30}}>
+                  <View style={styles.item_container}>
+                    <View style={styles.columns}>
+                      <Text style={styles.total_attribute_text}>
+                        {item.attribute}
+                      </Text>
+                    </View>
+                    <View style={styles.columns}>
+                      <Text style={styles.total_value_text}>{item.value}</Text>
+                    </View>
                   </View>
                 </View>
-                </View>
-               
               ) : (
                 <View style={styles.item_container}>
                   <View style={styles.columns}>
@@ -53,7 +62,7 @@ const InvoiceDetail = props => {
             </View>
           )}
         />
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

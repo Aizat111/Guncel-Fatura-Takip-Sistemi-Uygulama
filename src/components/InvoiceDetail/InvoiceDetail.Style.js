@@ -12,7 +12,7 @@ export default StyleSheet.create({
         borderColor: 'gray',
     },
     header_text:{
-        fontSize:14,
+        fontSize:15,
         fontWeight: 'bold'
     },
     header_container : {
@@ -38,12 +38,15 @@ export default StyleSheet.create({
     },
     inner_container: {
         marginTop: 10,
-        padding: 10
+        padding: 10,
+      
+        marginBottom:30
     },
     item_container: {
         padding:5,
         flex: 1,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        paddingBottom:10,
     },
     columns:{
         flex:1

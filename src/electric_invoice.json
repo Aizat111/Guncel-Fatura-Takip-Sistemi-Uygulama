@@ -1,0 +1,116 @@
+[
+    {
+        "id": "0",
+        "attribute" : "Tesisat / Tekil Kod",
+        "value": "1834689"
+    },
+    {
+        "id": "1",
+        "attribute" : "Dönem",
+        "value": "202210"
+    },
+    {
+        "id": "2",
+        "attribute" : "Fatura No",
+        "value": "P/58969717"
+    },
+    {
+        "id": "3",
+        "attribute" : "Adresi",
+        "value": "Ünaldı SK. No: 14/11 Kosova Mah"
+    },
+    {
+        "id" :"4",
+        "attribute" : "Tüketici Grubu",
+        "value" : "Tek Terimli Tek Zamanlı Mesken AG"
+    },
+    {
+        "id": "5",
+        "attribute" : "Tedarik Durumu",
+        "value": "Serbest Olmayan Tüketici"
+    },
+    {
+        "id": "6",
+        "attribute" : "Fatura ORT (kWh/gün)",
+        "value": "2.533"
+    },
+    {
+        "id": "7",
+        "attribute" : "Son Ödeme Tarihi",
+        "value": "25.11.2022"
+    },
+    {
+        "id": "8",
+        "attribute" : "Aktif İlk Endeks",
+        "value": "1182,496"
+    },
+    {
+        "id": "9",
+        "attribute" : "Aktif Son Endeks",
+        "value": "1263,565"
+    },
+    {
+        "id": "10",
+        "attribute" : "Aktif Tüketim",
+        "value": "81,069"
+    },
+    {
+        "id": "11",
+        "attribute" : "Gündüz İlk Endeks",
+        "value": "447,228"
+    },
+    {
+        "id": "12",
+        "attribute" : "Gündüz Son Endeks",
+        "value": "477,470"
+    },
+    {
+        "id": "13",
+        "attribute" : "Gündüz Tüketim",
+        "value": "30,242"
+    },
+    {
+        "id": "14",
+        "attribute" : "Puant İlk Endeks",
+        "value": "326,893"
+    },
+    {
+        "id": "15",
+        "attribute": "Puant Son Endeks",
+        "value": "348,157"
+    },
+    {
+        "id": "16",
+        "attribute": "Puant Son Endeks",
+        "value": "348,157"
+    }, 
+    {
+        "id": "17",
+        "attribute": "Puant Tüketim",
+        "value": "21.264"
+    }, {
+        "id": "18",
+        "attribute": "Gece İlk Endeks",
+        "value": "408,375"
+    },
+    {
+        "id": "19",
+        "attribute": "Gece Son Endeks",
+        "value": "437,938"
+    }, 
+    {
+        "id": "20",
+        "attribute": "Gece Tüketim",
+        "value": "29,563"
+    },
+    {
+        "id": "21",
+        "attribute": "ELK Tüketim Bed.",
+        "value": "125,29"
+    },
+    {
+        "id": "22",
+        "attribute": "Ödenecek Tutar",
+        "value": "140,70"
+    }
+]

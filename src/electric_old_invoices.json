@@ -1,0 +1,58 @@
+[
+    {
+        "id":0,
+        "subscriber_no":"1834689",
+        "invoice_no" : "P/53564578",
+        "invoice_period" : "2022-05",
+        "amount_paid": "113"
+    },
+    {
+        "id":1,
+        "subscriber_no":"1834689",
+        "invoice_no" : "P/57584578",
+        "invoice_period" : "2022-06",
+        "amount_paid": "96"
+    },
+    {
+        "id":2,
+        "subscriber_no":"1834689",
+        "invoice_no" : "P/43564578",
+        "invoice_period" : "2022-07",
+        "amount_paid": "78"
+    },
+    {
+        "id":3,
+        "subscriber_no":"1834689",
+        "invoice_no" : "P/24564578",
+        "invoice_period" : "2022-08",
+        "amount_paid": "170"
+    },
+    {
+        "id":4,
+        "subscriber_no":"1834689",
+        "invoice_no" : "P/53564578",
+        "invoice_period" : "2022-09",
+        "amount_paid": "76"
+    },
+    {
+        "id":5,
+        "subscriber_no":"1834689",
+        "invoice_no" : "P/78564578",
+        "invoice_period" : "2022-10",
+        "amount_paid": "102"
+    },
+    {
+        "id":6,
+        "subscriber_no":"1834689",
+        "invoice_no" : "P/89764578",
+        "invoice_period" : "2022-11",
+        "amount_paid": "88"
+    },
+    {
+        "id":7,
+        "subscriber_no":"1834689",
+        "invoice_no" : "P/53564578",
+        "invoice_period" : "2022-12",
+        "amount_paid": "140"
+    }
+]

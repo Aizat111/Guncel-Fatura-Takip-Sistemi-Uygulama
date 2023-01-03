@@ -14,7 +14,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { templateBlue } from './src/Constants';
 
-// const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 function App() {
   return (
@@ -22,8 +22,7 @@ function App() {
       {/* <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Dashboard" component={Dashboard} />
-        <Stack.Screen name="Faturalar" component={Faturalar} />
+        <Stack.Screen name="Anasayfa" component={Dashboard} />
       </Stack.Navigator> */}
       <Tab.Navigator
         screenOptions={({route}) =>({

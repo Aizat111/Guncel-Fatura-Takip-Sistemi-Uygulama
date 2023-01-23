@@ -8,12 +8,15 @@ import {
   StyleSheet,
   Dimensions,
 } from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import Background from './Background';
 import {templateBlue} from './Constants';
-import Field from './Field';
+
+import { AuthContext } from './context/authContext';
+
 
 const Login = props => {
+  const {signIn} = React.useContext(AuthContext);
+
   return (
     <Background>
       <View style={styles.container}>
@@ -49,7 +52,7 @@ const Login = props => {
           <Text style={styles.forgot_password_text}>Forgot Password ?</Text>
         </View>
 
-        <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('Dashboard')}>
+        <TouchableOpacity style={styles.button} onPress={signIn}>
           <Text style={styles.button_text}>Devam</Text>
         </TouchableOpacity>
       

@@ -1,10 +1,12 @@
 import React from 'react';
-import {SafeAreaView, View, Text, StatusBar, Image} from 'react-native';
+import {SafeAreaView, View, Text, StatusBar, Image, TouchableOpacity} from 'react-native';
 import {backgroundGray, templateBlue} from '../Constants';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+
+import { AuthContext } from '../context/authContext';
 
 const Profile = () => {
+  const {signOut} = React.useContext(AuthContext)
   return (
     <View style={{flex: 1}}>
       <StatusBar barStyle={'light-content'} backgroundColor={templateBlue} />
@@ -110,9 +112,9 @@ const Profile = () => {
         </View>
         <View
           style={{
-            borderWidth: 0.5,
+            borderWidth: 0.4,
             borderStyle: 'dashed',
-            flex: 1,
+            flex: 0.8,
             margin: 16,
             borderRadius: 10,
             backgroundColor: backgroundGray,
@@ -198,7 +200,11 @@ const Profile = () => {
               <Text style={{fontWeight: 'bold', fontSize: 15}}>05524969891</Text>
             </View>
           </View>
+          <TouchableOpacity onPress={signOut}>
+            <Text style={{fontWeight: 'bold', color: 'gray'}}>Çıkıs</Text>
+          </TouchableOpacity>
         </View>
+       
       </View>
     </View>
   );

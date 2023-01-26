@@ -1,16 +1,50 @@
 import React from 'react';
-import {SafeAreaView, View, Text, StatusBar, Image, TouchableOpacity} from 'react-native';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  StatusBar,
+  Image,
+  Alert,
+  TouchableOpacity,
+} from 'react-native';
 import {backgroundGray, templateBlue} from '../Constants';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { AuthContext } from '../context/authContext';
+import {AuthContext} from '../context/authContext';
 
 const Profile = () => {
-  const {signOut} = React.useContext(AuthContext)
+  const {signOut,users,loginUsers} = React.useContext(AuthContext);
+  const exit = ()=>{
+    Alert.alert(
+        'Uyarı!',
+        'Çıkmak ister misiniz?',
+        [
+        {
+            text: 'Evet',
+            onPress:()=>{
+              signOut()
+            }
+        },
+        {
+          text: 'Hayır',
+          onPress:()=>{
+             
+          }
+      }    
+        ]
+    )
+}
   return (
     <View style={{flex: 1}}>
       <StatusBar barStyle={'light-content'} backgroundColor={templateBlue} />
-      <View style={{flex: 0.3, backgroundColor: templateBlue}}></View>
+      <View style={{flex: 0.3, backgroundColor: templateBlue}}>
+        <View>
+          <TouchableOpacity onPress={signOut}>
+            <Icon style={{textAlign: 'right'}} name="sign-out" onPress={exit} color={'white'} size={26} />
+          </TouchableOpacity>
+        </View>
+      </View>
       <View style={{flex: 1, backgroundColor: 'white'}}>
         <View style={{justifyContent: 'center', alignItems: 'center'}}>
           <Image
@@ -30,7 +64,7 @@ const Profile = () => {
         </View>
         <View style={{zIndex: -1, marginTop: 60}}>
           <Text style={{fontWeight: 'bold', fontSize: 18, textAlign: 'center'}}>
-            Duygu Koç
+            {users[0].firstname} {users[0]?.lastname}
           </Text>
           <View>
             <View
@@ -42,7 +76,7 @@ const Profile = () => {
               }}>
               <Icon name="mobile" size={30} color="#212121" />
               <View style={{justifyContent: 'center', marginLeft: 10}}>
-                <Text style={{fontWeight: 'bold'}}>05524969891</Text>
+                <Text style={{fontWeight: 'bold'}}>{users[0]?.telNo}</Text>
               </View>
             </View>
             <View
@@ -54,7 +88,7 @@ const Profile = () => {
               }}>
               <Icon name="envelope" size={20} color="#212121" />
               <View style={{justifyContent: 'center', marginLeft: 10}}>
-                <Text style={{fontWeight: 'bold'}}>duygukoc@gmail.com</Text>
+                <Text style={{fontWeight: 'bold'}}>{users[0]?.email}</Text>
               </View>
             </View>
           </View>
@@ -151,11 +185,11 @@ const Profile = () => {
               marginLeft: 15,
               marginRight: 10,
             }}>
-            <View style={{flex:1}}>
+            <View style={{flex: 1}}>
               <Text style={{fontWeight: 'bold', color: 'gray'}}>Ad Soyad</Text>
             </View>
-            <View style={{flex:1}}>
-              <Text style={{fontWeight: 'bold', fontSize: 15}}>Duygu Koç</Text>
+            <View style={{flex: 1}}>
+              <Text style={{fontWeight: 'bold', fontSize: 15}}>{users[0].firstname} {users[0]?.lastname}</Text>
             </View>
           </View>
           <View
@@ -165,11 +199,13 @@ const Profile = () => {
               marginLeft: 15,
               marginRight: 10,
             }}>
-            <View style={{flex:1}}>
+            <View style={{flex: 1}}>
               <Text style={{fontWeight: 'bold', color: 'gray'}}>Adres</Text>
             </View>
-            <View style={{flex:1}}>
-              <Text style={{fontWeight: 'bold', fontSize: 15}}>Selçuklu, Konya</Text>
+            <View style={{flex: 1}}>
+              <Text style={{fontWeight: 'bold', fontSize: 15}}>
+                {users[0].address}
+              </Text>
             </View>
           </View>
           <View
@@ -179,11 +215,15 @@ const Profile = () => {
               marginLeft: 15,
               marginRight: 10,
             }}>
-            <View style={{flex:1}}>
-              <Text style={{fontWeight: 'bold', color: 'gray'}}>TC Kimlik No</Text>
+            <View style={{flex: 1}}>
+              <Text style={{fontWeight: 'bold', color: 'gray'}}>
+                TC Kimlik No
+              </Text>
             </View>
-            <View style={{flex:1}}>
-              <Text style={{fontWeight: 'bold', fontSize: 15}}>99408348128</Text>
+            <View style={{flex: 1}}>
+              <Text style={{fontWeight: 'bold', fontSize: 15}}>
+              {users[0].tc}
+              </Text>
             </View>
           </View>
           <View
@@ -193,18 +233,18 @@ const Profile = () => {
               marginLeft: 15,
               marginRight: 10,
             }}>
-            <View style={{flex:1}}>
-              <Text style={{fontWeight: 'bold', color: 'gray'}}>Telefon Numarası</Text>
+            <View style={{flex: 1}}>
+              <Text style={{fontWeight: 'bold', color: 'gray'}}>
+                Telefon Numarası
+              </Text>
             </View>
-            <View style={{flex:1}}>
-              <Text style={{fontWeight: 'bold', fontSize: 15}}>05524969891</Text>
+            <View style={{flex: 1}}>
+              <Text style={{fontWeight: 'bold', fontSize: 15}}>
+                {users[0].telNo}
+              </Text>
             </View>
           </View>
-          <TouchableOpacity onPress={signOut}>
-            <Text style={{fontWeight: 'bold', color: 'gray'}}>Çıkıs</Text>
-          </TouchableOpacity>
         </View>
-       
       </View>
     </View>
   );

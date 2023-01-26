@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {SafeAreaView} from 'react-navigation';
+import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import PieChart from 'react-native-pie-chart';
-import { LineChart } from 'react-native-chart-kit';
-import total_invoice_chart from './../total_invoice_chart.json';
 import {backgroundGray} from '../Constants';
+import LineChartHome from '../components/LineChart/LineChartHome';
 const Dashboard = props => {
   const widthAndHeight = 180;
   // const [series, setSeries] = useState([])
@@ -41,101 +39,72 @@ const Dashboard = props => {
   //   setSliceColor(testSliceColor)
   // },[])
   return (
-    <SafeAreaView
-      style={{
-        paddingTop: 80,
-        flex: 1,
-        backgroundColor: 'white',
-        alignItems: 'center',
-      }}>
+    <ScrollView>
       <View
         style={{
-          width: 360,
-          height: 270,
-          flexDirection: 'row',
-          backgroundColor: backgroundGray,
-          borderRadius: 20,
+          flex: 1,
+          backgroundColor: 'white',
+          alignItems: 'center',paddingTop:5,paddingBottom:40
         }}>
-        <View style={{marginLeft: 15, marginTop: 20}}>
-          <Text style={{fontSize: 20, fontWeight: 'bold'}}>700₺</Text>
-          <Text style={{color: 'gray', marginBottom: 10}}>
-            Bu Ayın Toplam Faturası
-          </Text>
-          <PieChart
-            widthAndHeight={widthAndHeight}
-            series={series}
-            sliceColor={sliceColor}
-            doughnut={true}
-            coverFill={'white'}
-            coverRadius={0.65}
-          />
-        </View>
-        <View style={{marginLeft: 40, marginTop: 50, margin: 40}}>
-          {invoices.map((item, index) => (
-            <View style={{flexDirection: 'row', paddingRight: 15}} key={index}>
+        <View
+          style={{
+            width: 360,
+            height: 270,
+            flexDirection: 'row',
+            backgroundColor: backgroundGray,
+            borderRadius: 20,
+          }}>
+          <View style={{marginLeft: 15, marginTop: 20}}>
+            <Text style={{fontSize: 20, fontWeight: 'bold'}}>700₺</Text>
+            <Text style={{color: 'gray', marginBottom: 10}}>
+              Bu Ayın Toplam Faturası
+            </Text>
+            <PieChart
+              widthAndHeight={widthAndHeight}
+              series={series}
+              sliceColor={sliceColor}
+              doughnut={true}
+              coverFill={'white'}
+              coverRadius={0.65}
+            />
+          </View>
+          <View style={{marginLeft: 40, marginTop: 50, margin: 40}}>
+            {invoices.map((item, index) => (
               <View
-                style={{justifyContent: 'center', marginLeft: 10, padding: 10}}>
-                <Text
+                style={{flexDirection: 'row', paddingRight: 15}}
+                key={index}>
+                <View
                   style={{
-                    backgroundColor: item.color,
-                    borderRadius: 100,
-                    width: 15,
-                    height: 10,
-                  }}></Text>
+                    justifyContent: 'center',
+                    marginLeft: 10,
+                    padding: 10,
+                  }}>
+                  <Text
+                    style={{
+                      backgroundColor: item.color,
+                      borderRadius: 100,
+                      width: 15,
+                      height: 10,
+                    }}></Text>
+                </View>
+                <View style={{paddingTop: 5}}>
+                  <Text style={{color: '#000', fontSize: 15}}>{item.name}</Text>
+                </View>
               </View>
-              <View style={{paddingTop: 5}}>
-                <Text style={{color: '#000', fontSize: 15}}>{item.name}</Text>
-              </View>
-            </View>
-          ))}
+            ))}
+          </View>
+        </View>
+        <View  style={{marginBottom: 40}}>
+          <LineChartHome title={'Ortalama Doğal Gaz Faturası'}/>
+        </View>
+        <View  style={{marginBottom: 40}}>
+          <LineChartHome title={'Ortalama Elektrik Faturası'} />
+        </View>
+        <View  style={{marginBottom: 40}}>
+          <LineChartHome title={'Ortalama Su Faturası'} />
         </View>
       </View>
-      <View>
-      <LineChart
-    data={{
-      labels: ["January", "February", "March", "April", "May", "June"],
-      datasets: [
-        {
-          data: [
-            Math.random() * 100,
-            Math.random() * 100,
-            Math.random() * 100,
-            Math.random() * 100,
-            Math.random() * 100,
-            Math.random() * 100
-          ]
-        }
-      ]
-    }}
-    width={350} // from react-native
-    height={220}
-    yAxisLabel="$"
-    yAxisSuffix="k"
-    yAxisInterval={1} // optional, defaults to 1
-    chartConfig={{
-      backgroundColor: "#e26a00",
-      backgroundGradientFrom: "#fb8c00",
-      backgroundGradientTo: "#ffa726",
-      decimalPlaces: 2, // optional, defaults to 2dp
-      color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-      labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-      style: {
-        borderRadius: 16
-      },
-      propsForDots: {
-        r: "6",
-        strokeWidth: "2",
-        stroke: "#ffa726"
-      }
-    }}
-    bezier
-    style={{
-      marginVertical: 8,
-      borderRadius: 16
-    }}
-  />
-      </View>
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 export default Dashboard;

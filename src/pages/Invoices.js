@@ -2,14 +2,14 @@ import {template} from '@babel/core';
 import React, {useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {SafeAreaView} from 'react-navigation';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import InvoiceDetail from '../components/InvoiceDetail/InvoiceDetail';
 import {backgroundGray, templateBlue} from '../Constants';
 
 const Faturalar = props => {
   const [activeLink, setActiveLink] = useState(1);
   return (
-    <SafeAreaView style={{paddingTop: 50, backgroundColor: 'white', flex: 1}}>
+    <View style={{ backgroundColor: 'white', flex: 1}}>
       <View style={styles.header_container}>
         <TouchableOpacity
           style={{
@@ -81,7 +81,7 @@ const Faturalar = props => {
       <View style={{alignItems: 'center'}}>
         <InvoiceDetail activeLink={activeLink}/>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 export default Faturalar;
@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginBottom: 10,
+    marginTop:20
   },
   nav_link_buttons: {},
 });

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -7,15 +7,27 @@ import {
   TouchableOpacity,
   StyleSheet,
   Dimensions,
+  Alert
 } from 'react-native';
-import Background from './Background';
-import {templateBlue} from './Constants';
+import Background from '../../Background';
+import {templateBlue} from '../../Constants';
 
-import { AuthContext } from './context/authContext';
+import { AuthContext } from '../../context/authContext';
 
 
 const Login = props => {
-  const {signIn} = React.useContext(AuthContext);
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const {signIn,users} = React.useContext(AuthContext);
+  const validate_user=()=>{
+    if(users.filter((item)=> (item?.tc ===username && item?.password===password)).length>0){
+      const user = users.filter((item)=> (item?.tc ===username && item?.password===password))[0]
+      signIn(user);
+    }   
+    else
+    Alert.alert('Uyarı','Yanlış kullanıcı')
+  }
+
 
   return (
     <Background>
@@ -32,12 +44,12 @@ const Login = props => {
 
         <View style={styles.inner_container}>
           <View style={styles.input_container}>
-            <Text style={styles.label}>E-Posta</Text>
+            <Text style={styles.label}>TC Kimlik Numara</Text>
             <TextInput
               style={styles.input}
-              placeholder="admin@demo.com"
-              keyboardType="email-address"
-              autoComplete="email"
+              placeholder="TC Kimlik Numara"
+           
+              onChangeText={(value)=>setUsername(value)}
             />
           </View>
           <View style={styles.input_container}>
@@ -47,15 +59,18 @@ const Login = props => {
               placeholder="demo"
               autoComplete="password"
               secureTextEntry={true}
+              onChangeText={(value)=>setPassword(value)}
             />
           </View>
+          <TouchableOpacity onPress={() => props.navigation.navigate('SendMail')}>
           <Text style={styles.forgot_password_text}>Forgot Password ?</Text>
+          </TouchableOpacity>
+          
         </View>
 
-        <TouchableOpacity style={styles.button} onPress={signIn}>
+        <TouchableOpacity style={styles.button} onPress={validate_user}>
           <Text style={styles.button_text}>Devam</Text>
         </TouchableOpacity>
-      
       </View>
     </Background>
   );
@@ -93,6 +108,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f8f6f2',
     width: Dimensions.get('window').width / 1.3,
     borderRadius: 10,
+    textTransform: 'capitalize'
   },
   new_user_container: {
     display: 'flex',

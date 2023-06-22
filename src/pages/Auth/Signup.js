@@ -14,7 +14,7 @@ import * as Yup from 'yup';
 import {Formik} from 'formik';
 import Background from '../../Background';
 import {templateBlue} from '../../Constants';
-import { AuthContext } from '../../context/authContext';
+// import { AuthContext } from '../../context/authContext';
 
 
 const SingupSchema = Yup.object().shape({
@@ -59,7 +59,7 @@ const initialValues = {
 };
 
 const Signup = props => {
-  const {signUp,users} = React.useContext(AuthContext);
+  // const {signUp,users} = React.useContext(AuthContext);
   return (
     <Background>
         <ScrollView>

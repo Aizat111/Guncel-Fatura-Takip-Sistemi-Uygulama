@@ -13,7 +13,7 @@ import * as Yup from 'yup';
 import {Formik} from 'formik';
 import Background from '../../Background';
 import {templateBlue} from '../../Constants';
-import {AuthContext} from '../../context/authContext';
+// import {AuthContext} from '../../context/authContext';
 
 const SingupSchema = Yup.object().shape({
   password: Yup.string()
@@ -30,7 +30,7 @@ const initialValues = {
 };
 
 const ResetPassword = props => {
-  const {signIn, users} = React.useContext(AuthContext);
+  // const {signIn, users} = React.useContext(AuthContext);
 
   return (
     <Background>

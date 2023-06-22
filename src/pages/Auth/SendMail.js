@@ -1,9 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   View,
   Text,
   TextInput,
-  Touchable,
   TouchableOpacity,
   StyleSheet,
   Dimensions,
@@ -13,7 +12,7 @@ import * as Yup from 'yup';
 import {Formik} from 'formik';
 import Background from '../../Background';
 import {templateBlue} from '../../Constants';
-import {AuthContext} from '../../context/authContext';
+// import {AuthContext} from '../../context/authContext';
 
 const SingupSchema = Yup.object().shape({
   email: Yup.string()
@@ -29,7 +28,7 @@ const initialValues = {
 
 const SendMail = props => {
 
-  const {signIn, users} = React.useContext(AuthContext);
+  // const {signIn, users} = React.useContext(AuthContext);
 
 
   return (

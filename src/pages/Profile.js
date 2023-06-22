@@ -11,10 +11,10 @@ import {
 import {backgroundGray, templateBlue} from '../Constants';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import {AuthContext} from '../context/authContext';
+import {AuthContext} from '../context/AuthContext';
 
 const Profile = () => {
-  const {signOut,users,loginUsers} = React.useContext(AuthContext);
+  const {logout, userInfo} = React.useContext(AuthContext);
   const exit = ()=>{
     Alert.alert(
         'Uyarı!',
@@ -40,7 +40,7 @@ const Profile = () => {
       <StatusBar barStyle={'light-content'} backgroundColor={templateBlue} />
       <View style={{flex: 0.3, backgroundColor: templateBlue}}>
         <View>
-          <TouchableOpacity onPress={signOut}>
+          <TouchableOpacity onPress={()=>{logout()}}>
             <Icon style={{textAlign: 'right'}} name="sign-out" onPress={exit} color={'white'} size={26} />
           </TouchableOpacity>
         </View>
@@ -64,7 +64,7 @@ const Profile = () => {
         </View>
         <View style={{zIndex: -1, marginTop: 60}}>
           <Text style={{fontWeight: 'bold', fontSize: 18, textAlign: 'center'}}>
-            {users[0].firstname} {users[0]?.lastname}
+            {userInfo?.firstname} {userInfo?.lastname}
           </Text>
           <View>
             <View
@@ -76,7 +76,7 @@ const Profile = () => {
               }}>
               <Icon name="mobile" size={30} color="#212121" />
               <View style={{justifyContent: 'center', marginLeft: 10}}>
-                <Text style={{fontWeight: 'bold'}}>{users[0]?.telNo}</Text>
+                <Text style={{fontWeight: 'bold'}}>{userInfo?.phone_number}</Text>
               </View>
             </View>
             <View
@@ -88,7 +88,7 @@ const Profile = () => {
               }}>
               <Icon name="envelope" size={20} color="#212121" />
               <View style={{justifyContent: 'center', marginLeft: 10}}>
-                <Text style={{fontWeight: 'bold'}}>{users[0]?.email}</Text>
+                <Text style={{fontWeight: 'bold'}}>{userInfo?.email}</Text>
               </View>
             </View>
           </View>
@@ -189,7 +189,7 @@ const Profile = () => {
               <Text style={{fontWeight: 'bold', color: 'gray'}}>Ad Soyad</Text>
             </View>
             <View style={{flex: 1}}>
-              <Text style={{fontWeight: 'bold', fontSize: 15}}>{users[0].firstname} {users[0]?.lastname}</Text>
+              <Text style={{fontWeight: 'bold', fontSize: 15}}>{userInfo?.firstname} {userInfo?.lastname}</Text>
             </View>
           </View>
           <View
@@ -204,7 +204,7 @@ const Profile = () => {
             </View>
             <View style={{flex: 1}}>
               <Text style={{fontWeight: 'bold', fontSize: 15}}>
-                {users[0].address}
+                {userInfo.address}
               </Text>
             </View>
           </View>
@@ -222,7 +222,7 @@ const Profile = () => {
             </View>
             <View style={{flex: 1}}>
               <Text style={{fontWeight: 'bold', fontSize: 15}}>
-              {users[0].tc}
+              {userInfo.tc}
               </Text>
             </View>
           </View>
@@ -240,7 +240,7 @@ const Profile = () => {
             </View>
             <View style={{flex: 1}}>
               <Text style={{fontWeight: 'bold', fontSize: 15}}>
-                {users[0].telNo}
+                {userInfo.phone_number}
               </Text>
             </View>
           </View>

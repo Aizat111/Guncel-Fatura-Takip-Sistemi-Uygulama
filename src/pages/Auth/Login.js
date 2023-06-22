@@ -12,13 +12,13 @@ import {
 import Background from '../../Background';
 import {templateBlue} from '../../Constants';
 
-import { AuthContext } from '../../context/authContext';
+import { AuthContext } from '../../context/AuthContext'
 
 
 const Login = props => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
-  const {signIn,users} = React.useContext(AuthContext);
+  const {login} = React.useContext(AuthContext);
   const validate_user=()=>{
     if(users.filter((item)=> (item?.tc ===username && item?.password===password)).length>0){
       const user = users.filter((item)=> (item?.tc ===username && item?.password===password))[0]
@@ -68,7 +68,7 @@ const Login = props => {
           
         </View>
 
-        <TouchableOpacity style={styles.button} onPress={validate_user}>
+        <TouchableOpacity style={styles.button} onPress={()=>{login(username, password)}}>
           <Text style={styles.button_text}>Devam</Text>
         </TouchableOpacity>
       </View>

@@ -13,7 +13,7 @@ import * as Yup from 'yup';
 import {Formik} from 'formik';
 import Background from '../../Background';
 import {templateBlue} from '../../Constants';
-import {AuthContext} from '../../context/authContext';
+// import {AuthContext} from '../../context/authContext';
 
 const SingupSchema = Yup.object().shape({
   code: Yup.number()
@@ -27,7 +27,7 @@ const initialValues = {
 };
 
 const CodeConfirm = props => {
-  const {signIn, users} = React.useContext(AuthContext);
+  // const {signIn, users} = React.useContext(AuthContext);
 
   return (
     <Background>

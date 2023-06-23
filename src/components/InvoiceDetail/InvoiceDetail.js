@@ -13,6 +13,7 @@ import {getUserInfo} from '../../utils/AsyncStorage';
 const InvoiceDetail = ({activeLink}) => {
   const [list, setList] = useState();
   const [user, setUser] = useState();
+  const [isPayed, setIspayed] = useState(false)
   const userInfo = async () => {
     let user = await getUserInfo();
     setUser(user);
@@ -28,7 +29,7 @@ const InvoiceDetail = ({activeLink}) => {
       sub = user?.subscription[2]?.subscription_no;
     }
     getData();
-  }, [activeLink]);
+  }, [activeLink, isPayed]);
 
   const getData = async () => {
     try {
@@ -39,6 +40,21 @@ const InvoiceDetail = ({activeLink}) => {
         )
         .then(res => {
           setList(res.data[0]);
+        });
+    } catch (error) {
+      console.log('Hata:', error);
+    }
+  };
+
+  const payBill = async () => {
+    try {
+      const instance = await api();
+      instance
+        .patch(
+          `/bill-payment-list/${list.id}`,
+        )
+        .then(res => {
+         setIspayed(true)
         });
     } catch (error) {
       console.log('Hata:', error);
@@ -58,7 +74,7 @@ const InvoiceDetail = ({activeLink}) => {
               <View style={styles.header_container}>
                 <Text style={styles.header_text}>Fatura Detayı</Text>
                 <View style={{flexDirection: 'row'}}>
-                  <TouchableOpacity style={styles.pay_button}>
+                  <TouchableOpacity style={styles.pay_button} onPress={()=>payBill()}>
                     <Text style={styles.pay_button_text}>Öde</Text>
                   </TouchableOpacity>
                 </View>

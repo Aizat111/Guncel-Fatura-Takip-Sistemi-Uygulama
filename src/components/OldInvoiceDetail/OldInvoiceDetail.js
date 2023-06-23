@@ -28,7 +28,6 @@ const OldInvoiceDetail = ({activeLink}) => {
    }, [activeLink]);
  
    const getData = async () => {
-     console.log(sub, activeLink)
      try {
        const instance = await api();
        instance

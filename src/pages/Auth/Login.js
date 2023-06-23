@@ -19,28 +19,13 @@ const Login = props => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const {login} = React.useContext(AuthContext);
-  const validate_user=()=>{
-    if(users.filter((item)=> (item?.tc ===username && item?.password===password)).length>0){
-      const user = users.filter((item)=> (item?.tc ===username && item?.password===password))[0]
-      signIn(user);
-    }   
-    else
-    Alert.alert('Uyarı','Yanlış kullanıcı')
-  }
-
-
   return (
     <Background>
       <View style={styles.container}>
         <Text style={styles.title}>
           Güncel Fatura Takip Sistemine Hoş Geldin!
         </Text>
-        <View style={styles.new_user_container}>
-          <Text style={styles.new_user_text}>Burada Yeni Misin? {''} </Text>
-          <TouchableOpacity onPress={() => props.navigation.navigate('Signup')}>
-            <Text style={styles.signup_text}>Kayıt Ol!</Text>
-          </TouchableOpacity>
-        </View>
+     
 
         <View style={styles.inner_container}>
           <View style={styles.input_container}>
@@ -56,16 +41,12 @@ const Login = props => {
             <Text style={styles.label}>Şifre</Text>
             <TextInput
               style={styles.input}
-              placeholder="demo"
+              placeholder="Şifre"
               autoComplete="password"
               secureTextEntry={true}
               onChangeText={(value)=>setPassword(value)}
             />
-          </View>
-          <TouchableOpacity onPress={() => props.navigation.navigate('SendMail')}>
-          <Text style={styles.forgot_password_text}>Forgot Password ?</Text>
-          </TouchableOpacity>
-          
+          </View>          
         </View>
 
         <TouchableOpacity style={styles.button} onPress={()=>{login(username, password)}}>

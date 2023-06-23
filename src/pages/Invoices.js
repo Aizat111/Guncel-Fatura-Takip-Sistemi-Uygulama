@@ -1,21 +1,21 @@
-import {template} from '@babel/core';
 import React, {useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import InvoiceDetail from '../components/InvoiceDetail/InvoiceDetail';
-import {backgroundGray, templateBlue} from '../Constants';
-
+import {templateBlue} from '../Constants';
+import { GestureHandlerRootView, NativeViewGestureHandler } from 'react-native-gesture-handler';
 const Faturalar = props => {
-  const [activeLink, setActiveLink] = useState(1);
+  const [activeLink, setActiveLink] = useState('SU');
   return (
+    <GestureHandlerRootView  style={styles.header_container}>
+    <NativeViewGestureHandler >
     <View style={{ backgroundColor: 'white', flex: 1}}>
       <View style={styles.header_container}>
         <TouchableOpacity
           style={{
             borderWidth: 0,
             borderBottomWidth: 2,
-            borderBottomColor: activeLink == 1 ? templateBlue : 'white',
+            borderBottomColor: activeLink == 'SU' ? templateBlue : 'white',
             width: 110,
             height: 25,
             backgroundColor: 'white',
@@ -23,10 +23,10 @@ const Faturalar = props => {
             justifyContent: 'center',
             borderRadius: 10,
           }}
-          onPress={() => setActiveLink(1)}>
+          onPress={() => setActiveLink('SU')}>
           <Text
             style={{
-              color: activeLink == 1 ? templateBlue : 'black',
+              color: activeLink == 'SU' ? templateBlue : 'black',
               fontWeight: 'bold',
               fontSize: 16,
             }}>
@@ -37,7 +37,7 @@ const Faturalar = props => {
           style={{
             borderWidth: 0,
             borderBottomWidth: 2,
-            borderBottomColor: activeLink == 2 ? templateBlue : 'white',
+            borderBottomColor: activeLink == 'ELEKTRİK' ? templateBlue : 'white',
             width: 110,
             height: 25,
             backgroundColor: 'white',
@@ -45,10 +45,10 @@ const Faturalar = props => {
             justifyContent: 'center',
             borderRadius: 10,
           }}
-          onPress={() => setActiveLink(2)}>
+          onPress={() => setActiveLink('ELEKTRİK')}>
           <Text
             style={{
-              color: activeLink == 2 ? templateBlue : 'black',
+              color: activeLink == 'ELEKTRİK'  ? templateBlue : 'black',
               fontWeight: 'bold',
               fontSize: 16,
             }}>
@@ -59,7 +59,7 @@ const Faturalar = props => {
           style={{
             borderWidth: 0,
             borderBottomWidth: 2,
-            borderBottomColor: activeLink == 3 ? templateBlue : 'white',
+            borderBottomColor: activeLink == 'GAZ' ? templateBlue : 'white',
             width: 110,
             height: 25,
             backgroundColor: 'white',
@@ -67,10 +67,10 @@ const Faturalar = props => {
             justifyContent: 'center',
             borderRadius: 10,
           }}
-          onPress={() => setActiveLink(3)}>
+          onPress={() => setActiveLink('GAZ')}>
           <Text
             style={{
-              color: activeLink == 3 ? templateBlue : 'black',
+              color: activeLink == 'GAZ'  ? templateBlue : 'black',
               fontWeight: 'bold',
               fontSize: 16,
             }}>
@@ -82,6 +82,8 @@ const Faturalar = props => {
         <InvoiceDetail activeLink={activeLink}/>
       </View>
     </View>
+    </NativeViewGestureHandler>
+    </GestureHandlerRootView>
   );
 };
 export default Faturalar;

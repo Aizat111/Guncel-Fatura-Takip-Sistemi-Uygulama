@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 import CreditCard from 'react-native-credit-card-form-ui';
 import WalletFlatList from '../components/Wallet/WalletFlatList';
+import { GestureHandlerRootView, NativeViewGestureHandler } from 'react-native-gesture-handler';
+
 
 const Wallet = () => {
   const creditCardRef = React.useRef();
@@ -61,6 +63,8 @@ const Wallet = () => {
 
   return (
     <>
+        <GestureHandlerRootView>
+    <NativeViewGestureHandler>
       {addCard ? (
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -92,6 +96,8 @@ const Wallet = () => {
           {/*  */}
         </>
       )}
+      </NativeViewGestureHandler>
+      </GestureHandlerRootView>
     </>
   );
 };

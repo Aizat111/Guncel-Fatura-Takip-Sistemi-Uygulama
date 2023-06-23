@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {View, Text} from 'react-native';
-import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
+import {ScrollView} from 'react-native-gesture-handler';
 import PieChart from 'react-native-pie-chart';
 import {backgroundGray} from '../Constants';
 import LineChartHome from '../components/LineChart/LineChartHome';
+import { GestureHandlerRootView, NativeViewGestureHandler } from 'react-native-gesture-handler';
 const Dashboard = props => {
   const widthAndHeight = 180;
   // const [series, setSeries] = useState([])
@@ -38,7 +39,14 @@ const Dashboard = props => {
   //   setSeries(testSeries)
   //   setSliceColor(testSliceColor)
   // },[])
+
+
+// ...
+
+
   return (
+    <GestureHandlerRootView>
+    <NativeViewGestureHandler>
     <ScrollView>
       <View
         style={{
@@ -105,6 +113,8 @@ const Dashboard = props => {
         </View>
       </View>
     </ScrollView>
+    </NativeViewGestureHandler>
+    </GestureHandlerRootView>
   );
 };
 export default Dashboard;

@@ -1,69 +1,162 @@
 import React, {useState, useEffect} from 'react';
-import {SafeAreaView, View, Text, FlatList} from 'react-native';
+import {SafeAreaView, View, Text} from 'react-native';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import styles from './InvoiceDetail.Style';
-import water_invoice from './../../water_invoice.json';
-import electric_invoice from './../../electric_invoice.json'
+
+import {
+  GestureHandlerRootView,
+  NativeViewGestureHandler,
+} from 'react-native-gesture-handler';
+import api from '../../pages/Services/auth';
+import {getUserInfo} from '../../utils/AsyncStorage';
+
 const InvoiceDetail = ({activeLink}) => {
-const [list, setList] = useState(water_invoice);
-useEffect(()=>{
-if(activeLink==1){
-  setList(water_invoice)
-}
-else if(activeLink==2) {
-  setList(electric_invoice)
-}
-},[activeLink])
+  const [list, setList] = useState();
+  const [user, setUser] = useState();
+  const userInfo = async () => {
+    let user = await getUserInfo();
+    setUser(user);
+  };
+  let sub = '';
+  useEffect(() => {
+    userInfo();
+    if (activeLink == 'ELEKTRİK') {
+      sub = user?.subscription[0]?.subscription_no;
+    } else if (activeLink == 'SU') {
+      sub = user?.subscription[1]?.subscription_no;
+    } else if (activeLink == 'GAZ') {
+      sub = user?.subscription[2]?.subscription_no;
+    }
+    getData();
+  }, [activeLink]);
+
+  const getData = async () => {
+    try {
+      const instance = await api();
+      instance
+        .get(
+          `/bill-payment-list?status=0&subscriberNo=${sub}&product=${activeLink}`,
+        )
+        .then(res => {
+          setList(res.data[0]);
+        });
+    } catch (error) {
+      console.log('Hata:', error);
+    }
+  };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.header_container}>
-        <Text style={styles.header_text}>Fatura Detayı</Text>
-        <View style={{flexDirection: 'row'}}>
-          {/* <TouchableOpacity>
-                    <Text>
-                        Ödenecek Tutar
-                    </Text>
-                </TouchableOpacity> */}
-          <TouchableOpacity style={styles.pay_button}>
-            <Text style={styles.pay_button_text}>Öde</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-      <ScrollView style={styles.inner_container}>
-        <FlatList
-          keyExtractor={item => item.id}
-          data={list}
-          renderItem={({item}) => (
-            <View>
-              {item.id == list.length-1 ? (
-                <View style={{marginTop: 30}}>
+    <GestureHandlerRootView>
+      <NativeViewGestureHandler>
+        <SafeAreaView style={styles.container}>
+          {list == null ? (
+            <View style={{margin: 20, marginLeft: 85}}>
+              <Text style={{color: 'gray'}}>Fatura Bulunmamaktadır</Text>
+            </View>
+          ) : (
+            <>
+              <View style={styles.header_container}>
+                <Text style={styles.header_text}>Fatura Detayı</Text>
+                <View style={{flexDirection: 'row'}}>
+                  <TouchableOpacity style={styles.pay_button}>
+                    <Text style={styles.pay_button_text}>Öde</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+              <ScrollView style={styles.inner_container}>
+                <View>
                   <View style={styles.item_container}>
                     <View style={styles.columns}>
-                      <Text style={styles.total_attribute_text}>
-                        {item.attribute}
+                      <Text style={styles.attribute_text}>Abone No</Text>
+                    </View>
+                    <View style={styles.columns}>
+                      <Text>{list?.subscriberNo}</Text>
+                    </View>
+                  </View>
+                  <View style={styles.item_container}>
+                    <View style={styles.columns}>
+                      <Text style={styles.attribute_text}>Dönem</Text>
+                    </View>
+                    <View style={styles.columns}>
+                      <Text>{list?.billIssueDate}</Text>
+                    </View>
+                  </View>
+                  <View style={styles.item_container}>
+                    <View style={styles.columns}>
+                      <Text style={styles.attribute_text}>Adres</Text>
+                    </View>
+                    <View style={styles.columns}>
+                      <Text>{list?.provisionCode}</Text>
+                    </View>
+                  </View>
+                  <View style={styles.item_container}>
+                    <View style={styles.columns}>
+                      <Text style={styles.attribute_text}>Fatura No</Text>
+                    </View>
+                    <View style={styles.columns}>
+                      <Text>{list?.billNo}</Text>
+                    </View>
+                  </View>
+                  <View style={styles.item_container}>
+                    <View style={styles.columns}>
+                      <Text style={styles.attribute_text}>
+                        Son Ödeme Tarihi
                       </Text>
                     </View>
                     <View style={styles.columns}>
-                      <Text style={styles.total_value_text}>{item.value}</Text>
+                      <Text>{list?.billDueDate}</Text>
+                    </View>
+                  </View>
+                  <View style={styles.item_container}>
+                    <View style={styles.columns}>
+                      <Text style={styles.attribute_text}>Abone Türü</Text>
+                    </View>
+                    <View style={styles.columns}>
+                      <Text>{list?.channelCode}</Text>
+                    </View>
+                  </View>
+                  <View style={styles.item_container}>
+                    <View style={styles.columns}>
+                      <Text style={styles.attribute_text}>
+                        İlk Okuma Tarihi
+                      </Text>
+                    </View>
+                    <View style={styles.columns}>
+                      <Text>{list?.agentCode}</Text>
+                    </View>
+                  </View>
+                  <View style={styles.item_container}>
+                    <View style={styles.columns}>
+                      <Text style={styles.attribute_text}>
+                        Son Okuma Tarihi
+                      </Text>
+                    </View>
+                    <View style={styles.columns}>
+                      <Text>{list?.institution}</Text>
+                    </View>
+                  </View>
+                  <View style={{marginTop: 30}}>
+                    <View style={styles.item_container}>
+                      <View style={styles.columns}>
+                        <Text style={styles.total_attribute_text}>
+                          Ödenecek Tutar
+                        </Text>
+                      </View>
+                      <View style={styles.columns}>
+                        <Text style={styles.total_value_text}>
+                          {list.billAmount}
+                          {list.currency}
+                        </Text>
+                      </View>
                     </View>
                   </View>
                 </View>
-              ) : (
-                <View style={styles.item_container}>
-                  <View style={styles.columns}>
-                    <Text style={styles.attribute_text}>{item.attribute}</Text>
-                  </View>
-                  <View style={styles.columns}>
-                    <Text>{item.value}</Text>
-                  </View>
-                </View>
-              )}
-            </View>
+              </ScrollView>
+            </>
           )}
-        />
-      </ScrollView>
-    </SafeAreaView>
+        </SafeAreaView>
+      </NativeViewGestureHandler>
+    </GestureHandlerRootView>
   );
 };
 

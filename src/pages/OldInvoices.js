@@ -3,17 +3,17 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {lineGray} from '../Constants';
 
 import OldInvoiceDetail from '../components/OldInvoiceDetail/OldInvoiceDetail';
-import { templateBlue } from '../Constants';
+import {templateBlue} from '../Constants';
 const OldInvoices = () => {
-    const [activeLink, setActiveLink] = useState(1);
+  const [activeLink, setActiveLink] = useState('SU');
   return (
     <View style={styles.container}>
-          <View style={styles.header_container}>
+      <View style={styles.header_container}>
         <TouchableOpacity
           style={{
             borderWidth: 0,
             borderBottomWidth: 2,
-            borderBottomColor: activeLink == 1 ? templateBlue : 'white',
+            borderBottomColor: activeLink == 'SU' ? templateBlue : 'white',
             width: 110,
             height: 25,
             backgroundColor: 'white',
@@ -21,10 +21,10 @@ const OldInvoices = () => {
             justifyContent: 'center',
             borderRadius: 10,
           }}
-          onPress={() => setActiveLink(1)}>
+          onPress={() => setActiveLink('SU')}>
           <Text
             style={{
-              color: activeLink == 1 ? templateBlue : 'black',
+              color: activeLink == 'SU' ? templateBlue : 'black',
               fontWeight: 'bold',
               fontSize: 16,
             }}>
@@ -35,7 +35,8 @@ const OldInvoices = () => {
           style={{
             borderWidth: 0,
             borderBottomWidth: 2,
-            borderBottomColor: activeLink == 2 ? templateBlue : 'white',
+            borderBottomColor:
+              activeLink == 'ELEKTRİK' ? templateBlue : 'white',
             width: 110,
             height: 25,
             backgroundColor: 'white',
@@ -43,10 +44,10 @@ const OldInvoices = () => {
             justifyContent: 'center',
             borderRadius: 10,
           }}
-          onPress={() => setActiveLink(2)}>
+          onPress={() => setActiveLink('ELEKTRİK')}>
           <Text
             style={{
-              color: activeLink == 2 ? templateBlue : 'black',
+              color: activeLink == 'ELEKTRİK' ? templateBlue : 'black',
               fontWeight: 'bold',
               fontSize: 16,
             }}>
@@ -57,7 +58,7 @@ const OldInvoices = () => {
           style={{
             borderWidth: 0,
             borderBottomWidth: 2,
-            borderBottomColor: activeLink == 3 ? templateBlue : 'white',
+            borderBottomColor: activeLink == 'GAZ' ? templateBlue : 'white',
             width: 110,
             height: 25,
             backgroundColor: 'white',
@@ -65,10 +66,10 @@ const OldInvoices = () => {
             justifyContent: 'center',
             borderRadius: 10,
           }}
-          onPress={() => setActiveLink(3)}>
+          onPress={() => setActiveLink('GAZ')}>
           <Text
             style={{
-              color: activeLink == 3 ? templateBlue : 'black',
+              color: activeLink == 'GAZ' ? templateBlue : 'black',
               fontWeight: 'bold',
               fontSize: 16,
             }}>
@@ -96,13 +97,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginBottom: 10,
-    marginTop:20
+    marginTop: 20,
   },
   inner_header_container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginLeft:10,
-    marginRight:10,
+    marginLeft: 10,
+    marginRight: 10,
     marginTop: 10,
     height: 25,
     borderBottomColor: lineGray,

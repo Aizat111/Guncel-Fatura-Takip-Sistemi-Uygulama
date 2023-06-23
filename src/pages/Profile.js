@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-  SafeAreaView,
   View,
   Text,
   StatusBar,
@@ -10,11 +9,21 @@ import {
 } from 'react-native';
 import {backgroundGray, templateBlue} from '../Constants';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
 import {AuthContext} from '../context/AuthContext';
+import {getUserInfo} from "../utils/AsyncStorage"
+
 
 const Profile = () => {
-  const {logout, userInfo} = React.useContext(AuthContext);
+  const {logout} = React.useContext(AuthContext);
+  const[user, setUser] = useState() ;
+  const userInfo = async() =>{
+   let user  = await getUserInfo();
+   setUser(user)
+  }
+  useEffect(()=>{
+    userInfo();
+  },[])
+
   const exit = ()=>{
     Alert.alert(
         'Uyarı!',
@@ -23,7 +32,7 @@ const Profile = () => {
         {
             text: 'Evet',
             onPress:()=>{
-              signOut()
+              logout()
             }
         },
         {
@@ -35,6 +44,7 @@ const Profile = () => {
         ]
     )
 }
+
   return (
     <View style={{flex: 1}}>
       <StatusBar barStyle={'light-content'} backgroundColor={templateBlue} />
@@ -64,7 +74,7 @@ const Profile = () => {
         </View>
         <View style={{zIndex: -1, marginTop: 60}}>
           <Text style={{fontWeight: 'bold', fontSize: 18, textAlign: 'center'}}>
-            {userInfo?.firstname} {userInfo?.lastname}
+            {user?.firstname} {user?.lastname} 
           </Text>
           <View>
             <View
@@ -76,7 +86,7 @@ const Profile = () => {
               }}>
               <Icon name="mobile" size={30} color="#212121" />
               <View style={{justifyContent: 'center', marginLeft: 10}}>
-                <Text style={{fontWeight: 'bold'}}>{userInfo?.phone_number}</Text>
+                <Text style={{fontWeight: 'bold'}}>{user?.phone_number}</Text>
               </View>
             </View>
             <View
@@ -88,7 +98,7 @@ const Profile = () => {
               }}>
               <Icon name="envelope" size={20} color="#212121" />
               <View style={{justifyContent: 'center', marginLeft: 10}}>
-                <Text style={{fontWeight: 'bold'}}>{userInfo?.email}</Text>
+                <Text style={{fontWeight: 'bold'}}>{user?.email}</Text>
               </View>
             </View>
           </View>
@@ -101,48 +111,24 @@ const Profile = () => {
             // marginLeft: 20,
             // marginRight: 20,
           }}>
-          <View
-            style={{
-              borderWidth: 0.5,
-              borderStyle: 'dashed',
-              borderColor: 'gray',
-              width: 100,
-              height: 50,
-              borderRadius: 10,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <Text style={{fontSize: 18, fontWeight: 'bold'}}>45₺</Text>
-            <Text style={{color: 'gray'}}>Su</Text>
-          </View>
-          <View
-            style={{
-              borderWidth: 0.5,
-              borderStyle: 'dashed',
-              borderColor: 'gray',
-              width: 100,
-              height: 50,
-              borderRadius: 10,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <Text style={{fontSize: 18, fontWeight: 'bold'}}>45₺</Text>
-            <Text style={{color: 'gray'}}>Elektrik</Text>
-          </View>
-          <View
-            style={{
-              borderWidth: 0.5,
-              borderStyle: 'dashed',
-              borderColor: 'gray',
-              width: 100,
-              height: 50,
-              borderRadius: 10,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <Text style={{fontSize: 18, fontWeight: 'bold'}}>45₺</Text>
-            <Text style={{color: 'gray'}}>Doğal Gaz</Text>
-          </View>
+            {user?.subscription?.map((sub)=>{
+              return(  <View
+                style={{
+                  borderWidth: 0.5,
+                  borderStyle: 'dashed',
+                  borderColor: 'gray',
+                  width: 100,
+                  height: 50,
+                  borderRadius: 10,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Text style={{fontSize: 14, fontWeight: 'bold'}}>{sub.value}</Text>
+                <Text style={{color: 'gray', fontSize:13}}>{sub.subscription_no}</Text>
+              </View>)
+            })}
+        
+       
         </View>
         <View
           style={{
@@ -164,7 +150,7 @@ const Profile = () => {
             <Text style={{fontSize: 17, fontWeight: 'bold', marginLeft: 15}}>
               Hesap Detayı
             </Text>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               style={{
                 backgroundColor: templateBlue,
                 width: 30,
@@ -174,8 +160,8 @@ const Profile = () => {
                 borderRadius: 10,
               }}>
               {/* <Text style={{color: 'white', fontWeight: 'bold'}}>Düzenle</Text> */}
-              <Icon name="edit" color={'white'} size={16} />
-            </TouchableOpacity>
+              {/* <Icon name="edit" color={'white'} size={16} />
+            </TouchableOpacity> */} 
           </View>
 
           <View
@@ -189,7 +175,7 @@ const Profile = () => {
               <Text style={{fontWeight: 'bold', color: 'gray'}}>Ad Soyad</Text>
             </View>
             <View style={{flex: 1}}>
-              <Text style={{fontWeight: 'bold', fontSize: 15}}>{userInfo?.firstname} {userInfo?.lastname}</Text>
+              <Text style={{fontWeight: 'bold', fontSize: 15}}>{user?.firstname} {user?.lastname}</Text>
             </View>
           </View>
           <View
@@ -204,7 +190,7 @@ const Profile = () => {
             </View>
             <View style={{flex: 1}}>
               <Text style={{fontWeight: 'bold', fontSize: 15}}>
-                {userInfo.address}
+                {user?.address}
               </Text>
             </View>
           </View>
@@ -222,7 +208,7 @@ const Profile = () => {
             </View>
             <View style={{flex: 1}}>
               <Text style={{fontWeight: 'bold', fontSize: 15}}>
-              {userInfo.tc}
+              {user?.tc}
               </Text>
             </View>
           </View>
@@ -240,7 +226,7 @@ const Profile = () => {
             </View>
             <View style={{flex: 1}}>
               <Text style={{fontWeight: 'bold', fontSize: 15}}>
-                {userInfo.phone_number}
+                {user?.phone_number}
               </Text>
             </View>
           </View>
